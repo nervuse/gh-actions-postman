@@ -1,0 +1,39 @@
+{
+	"id": "d5de482f-82a6-4116-8dda-a359e411d8be",
+	"name": "santa-ommelnikova-test",
+	"values": [
+		{
+			"key": "password",
+			"value": "xFU1QuNuF9oV83E",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://santa-secret.ru/api",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userName",
+			"value": "globaltheqa@gmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "initialPassword",
+			"value": "1234test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userID",
+			"value": "6549808",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-03-17T22:14:16.867Z",
+	"_postman_exported_using": "Postman/10.24.3"
+}
