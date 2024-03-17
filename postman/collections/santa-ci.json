@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "9ea9ef02-721b-4da0-be58-51f6efd10d3e",
+		"name": "santa-ci",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26126335-9ea9ef02-721b-4da0-be58-51f6efd10d3e"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb6f1c22-8b4f-4d92-8f93-350b6bba4bcd",
+						"exec": [
+							"const resp = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"User is correct\", function () {",
+							"    pm.expect(resp.id).to.eql(Number(pm.environment.get(\"userID\")))",
+							"})",
+							"",
+							"pm.test(\"Email is correct\", function () {",
+							"    pm.expect(resp.email).to.eql(pm.environment.get(\"userName\"))",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e7e6b89e-a2d3-44af-892a-6cf47107a440",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{userName}}\",\"password\":\"{{initialPassword}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://santa-secret.ru/api/session",
+			"id": "3b4e9f52-de15-4b59-b978-1d803b2209d8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/session",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://santa-secret.ru/api/account",
+			"id": "bff878b8-2451-41bf-b91b-c33d7c62f2cd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/account",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://santa-secret.ru/api/account/password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eaad59f7-eb21-476e-b8f2-b9eae224e8f3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const password = JSON.parse(request.data)",
+							"pm.environment.set(\"password\", password.password)",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e3f23df3-e310-44ca-b2a5-5d21954e68b9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\":\"{{$randomPassword}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48dc251d-98ae-417f-82cf-634569002afa",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9b20c00e-34f8-471b-a2db-5c8c8e4040cf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"{{userName}}\",\"password\":\"{{password}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://santa-secret.ru/api/account/password Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "885c30c5-e258-42ba-bcd1-d4e1f6e1d28e",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Error message is correct\", function () {",
+							"    const resp = pm.response.json();",
+							"    pm.expect(resp.error.message).to.eql(\"validations.invalid\")",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4c4d4bae-bbf0-478b-b70a-87d68cb0745d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\":\" \"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://santa-secret.ru/api/account/password Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbab60cb-6fab-4941-8528-6281f25bf4cc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const password = JSON.parse(request.data)",
+							"console.log(request.data)",
+							"pm.environment.set(\"password\", password.password)",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "934867f8-21f9-4020-9052-a649f54a2dcb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\":\"{{initialPassword}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/account/password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"password"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "516de4e4-cacc-4a84-b64b-5fc01ec42993",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bea195f4-feea-412a-98be-53c7c6b54f65",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "76c8d366-a558-44fb-a8ea-b7faefbe3d0e",
+			"key": "baseUrl",
+			"value": "{{baseUrl}}"
+		}
+	]
+}
